@@ -1,0 +1,35 @@
+<!doctype html>
+<title>ControlPanel</title>
+<h1>Control Motors (X, Y, Z) and position</h1>
+<p>Current Position: X={{ displayX }}, Y={{ displayY }}, Z={{ displayZ }}</p>
+
+<script src="{{ url_for('static', filename='WebUI.js') }}"></script>
+
+<form id="motorForm" method="post">
+  <label>X:</label> <input type="number" name="x" min="-100000" max="100000" value="0"><br>
+  <label>Y:</label> <input type="number" name="y" min="-100000" max="100000" value="0"><br>
+  <label>Z:</label> <input type="number" name="z" min="-100000" max="100000" value="0"><br><br>
+
+  <button onclick="submitForm('/move')" type="button">Move motors</button>
+  <button onclick="submitForm('/absolute')" type="button">Move motors to absolute position</button>
+  <button onclick="submitForm('/help')" type="button">help func</button>
+</form>
+
+<form method="post"id="lightForm" action="/setLed">
+  <label>Led light level</label> <input type="range" name="Light level" min="0" max="10" value="0.0"><br>
+  
+  <button type="submit">set light</button>
+</form>
+
+<form method="post" action="/zero_pos">
+  <button type="submit">set current pos as initial position</button>
+</form>
+<form method="post" action="/stop">
+  <button type="submit">STOP</button>
+</form>
+<form method="post" action="/help">
+  <button type="submit">help</button>
+</form>
+
+<p>help response: </p>
+<pre>{{response}}</pre>
